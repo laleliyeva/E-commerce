@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <div class="main_contact_area">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="container-inner">
+                                
+                                <ul>
+                                    <li class="home">
+                                        <a href="#">Home</a>
+                                        <span>
+                                            <i class="fa fa-angle-right"></i>
+                                        </span>
+                                    </li>
+                                    <li class="home-two">
+                                        <a href="#">Blog</a>
+                                        <span>
+                                            <i class="fa fa-angle-right"></i>
+                                        </span>
+                                    </li>
+                                    <li class="category3">
+                                        <strong>Blog-images</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <section class="main-blog-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-9">
+                       
+                        <div class="single-bolg s-post blog">
+                            <div class="post-format-area">
+                                <div class="b-slide-all owl-carousel">
+                                    {% if blog.types == 4 %} 
+                                            <audio controls>
+                                                <source src="{{ blog.image.url }}" type="audio/mpeg">
+                                                Your browser does not support the audio tag.
+                                            </audio>
+                                        {% elif blog.types == 3 %} 
+                                            <video style="width: 850px;" controls>
+                                                <source src="{{ blog.image.url }}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        {% else %}  
+                                            <img src="{{ blog.image.url }}" alt="">
+                                        {% endif %}
+                                </div>
+                            </div>
+                            <div class="entry-header-area">
+                                <div class="post-types">
+                                    <i class="fa fa-picture-o"></i>
+                                </div>
+                                <div class="info-blog">
+                                    <div class="single-b-info category-name">
+                                        <i class="fa fa-folder-open-o"></i>
+                                        <a href="#">
+                                            <span>{{ blog.get_type_display_name }}</span>
+                                        </a>
+                                    </div>
+                                    <div class="single-b-info createdby">
+                                        <i class="fa fa-user"></i>
+                                        <span>{{ blog.author}}</span>
+                                    </div>
+                                    <div class="single-b-info hits">
+                                        <i class="fa fa-eye"></i>
+                                        <span>Hits: 256</span>
+                                    </div>
+                                    <div class="single-b-info post_rating">
+                                        Rating:
+                                        <div class="voting-symbol">
+                                            <span class="star active"></span>
+                                            <span class="star active"></span>
+                                            <span class="star active"></span>
+                                            <span class="star"></span>
+                                            <span class="star"></span>
+                                        </div>
+                                    </div>
+                                    <h2 class="name">
+                                        {{ blog.title }}
+                                    </h2>
+                                </div>
+                            </div>
+                            <p>{{ blog.description }}</p>
+                            
+                            <div class="share-area">
+                                <a href="#">
+                                    <img alt="" src="{% static 'img/blog/shareicon.png' %}">
+                                </a>
+                            </div>
+                            <div class="blog-comment-area">
+                                <div class="all-p-title">
+                                    <h3>Add comment</h3>
+                                </div>
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    {{form.as_p}}
+                                    <button class="btn btn-primary"  type="submit">Submit</button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="blog-right-sidebar">
+                            <h3 class="sp-module-title">
+                                <span>Newsletter</span>
+                            </h3>
+                            <div class="sub-area">
+                                <form action="#">
+                                    <input type="text" placeholder="E-mail">
+                                    <input type="submit" value="Subscribe">
+                                </form>
+                            </div>
+                            <div class="latest-posts">
+                                <h3 class="sp-module-title">
+                                    <span>Latest Posts</span>
+                                </h3>
+                                {% for blog in recent %}
+                                <div class="single-l-post">
+                                    <a href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a>
+                                    <p>{{ blog.created_time }}</p>
+                                </div>
+                                {% endfor %}
+                               
+                            </div>
+                            <div class="latest-posts">
+                                <h3 class="sp-module-title">
+                                    <span>Authors</span>
+                                </h3>
+                                {% for author in authors %}
+                                <div class="single-l-post">
+                                    <a href="{{ author.id }}">{{ author.title }}</a>
+                                </div>
+                                {% endfor %}
+                               
+                            </div>
+                            <div class="latest-posts">
+                                <h3 class="sp-module-title">
+                                    <span>Categories</span>
+                                </h3>
+                                {% for blog_type in blog_types %}
+                                <div class="single-l-post">
+                                    <a href="{{ blog_type.id }}">{{ blog_type.types }}</a>
+                                </div>
+                                {% endfor %}
+                               
+                            </div>
+                            <div class="add-r-sidebar">
+                                <p class="banner-block">
+                                    <a href="#">
+                                        <img alt="" src="{% static 'img/blog/3_002.jpg' %}">
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="shop_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="title ma-title lab">
+                            <h2>
+                                Our brands
+                            </h2>
+                        </div>
+                    </div>
+                </div>        
+                <div class="item_all indicator-style owl-carousel">
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                </div>
+            </div>
+        </div>
+		<!-- end shop_area
+		============================================ -->
+        <!-- start tweets_area
+		============================================ -->
+        <section class="tweets_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="tweet-content">
+                            <div class="tweet-title ma-title">
+                                <h2>Latest Tweets</h2>
+                            </div>
+                            <div class="twitter-article">
+                                <div class="twitter-pic">
+                                    <a href="#"><img src="{% static 'img/tweet/sMv5yar__normal.png' %}" alt="" /></a>
+                                </div>
+                                <div class="twitter-text">
+                                    <span class="tweetprofilelink">
+                                        <strong>
+                                        <a href="#">Magento themes Club</a>
+                                        </strong>
+                                        <a href="#">@plazathemes</a>
+                                    </span>
+                                    <br>
+                                        Check Out "Optician - Responsive #OpenCart #Digital #Theme" on #envatomarket by
+                                        <a href="#">@posthemes</a>
+                                        #themeforest
+                                        <a href="#">https://t.co/NGqqa3v0tf</a>
+                                    <br>
+                                    <span class="tweet-time">
+                                        <a href="#">11h</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="social-footer">
+                            <div class="ma-title">
+                                <h2>Stay Connected</h2>
+                            </div>
+                            <div class="footer-static-content">
+                                <ul class="link-follow">
+                                    <li class="first">
+                                        <a class="twitter fa fa-twitter" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="google fa fa-google-plus" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="facebook fa fa-facebook" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="linkedin fa fa-linkedin" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="youtube fa fa-youtube" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="rss fa fa-rss" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="vimeo-square fa fa-vimeo-square" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="instagram fa fa-instagram" href="#"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}
+        <!-- end tweets_area
+		============================================ -->
+        <!-- start ma-footer-stati
+		============================================ -->
+        

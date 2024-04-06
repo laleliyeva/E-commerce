@@ -1,0 +1,778 @@
+{% load i18n %}
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="fr">
+    
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Hitstore</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+    ============================================ -->		
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <!-- Google Fonts
+    ============================================ -->		
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap CSS
+    ============================================ -->		
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Bootstrap CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <!-- owl.carousel CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+    <!-- nivo slider CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{% static 'lib/css/nivo-slider.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'lib/css/preview.css' %}" type="text/css" media="screen" />
+    <!-- animate CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- meanmenu CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/meanmenu.min.css' %}">
+    <!-- Image Zoom CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/img-zoom/jquery.simpleLens.css' %}">
+    <!-- normalize CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <!-- ======================================= -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <!-- style CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- responsive CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- modernizr JS
+    ============================================ -->		
+    <script src="{% static 'js/vendor/modernizr-3.11.7.min.js' %}"></script>
+</head>
+<body class="home-1">
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Add your site or application content here -->
+    <!-- start header_area
+    ============================================ -->
+    <header class="header_area">
+        <div class="top-link">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="top-logo">
+                            <a href="{% url 'index' %}"><img src="{% static 'img/logo/logo.gif.png' %}" alt=""></a>
+                        </div>
+                      
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="english">
+                            <ul>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="english  block-language-wrapper ">
+                                        <ul class="dropdown menu" role="menu">
+                                            {% get_current_language as CURRENT_LANGUAGE %}
+                                            {% get_available_languages as AVAILABLE_LANGUAGES %}
+                                            {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+                                            <li><a href=""><i class="fa fa-caret-down"></i>
+                                                {% if CURRENT_LANGUAGE == 'en' %}
+                                                <img src="https://flagcdn.com/20x15/gb.png" height="10" width="15px" alt="..">
+                                                {% else %}
+                                                <img src="https://flagcdn.com/20x15/{{ CURRENT_LANGUAGE }}.png" height="10" width="15px" alt="..">
+                                                {% endif %}
+                                            
+                                            </a>
+                                                <ul>
+                                                    <li >  
+                                                        {% for language in languages %}
+                                                            <a href="{% if language.code == 'en' %}/{% else %}/{{language.code}}/{% endif %}" class="{% if language.code == CURRENT_LANGUAGE %}active{% endif %}" >
+                                                                {% if language.code == 'en' %}
+                                                                <img src="https://flagcdn.com/20x15/gb.png" height="10" width="15px" alt="{{ language.code }}">
+                                                                EN
+                                                                {% else %}
+                                                                <img src="https://flagcdn.com/20x15/{{ language.code }}.png" height="10" width="15px" alt="{{ language.code }}">
+                                                                AZ
+                                                                {% endif %}
+                                                            </a>
+                                                        {% endfor %}
+                                                    </li>
+                              
+                                        </ul>
+                                    </div>
+                                    <li class="dropit-trigger">
+                                        <a class="parent-link login_click" href="#"><i class="fa fa-key"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="{% url 'wishlist' %}">My Wishlist</a></li>
+                                            <li><a href="{% url 'basket' %}">My Cart</a></li>
+                                            <li><a href="{% url 'login' %}">Login</a></li>
+                                            <li><a href="{% url 'register' %}">Register</a></li>
+                                            <li><a href="{% url 'logout' %}">Logout</a></li>
+
+
+                                        </ul>
+                                    </li>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header">
+            <div class="container">
+                 
+                
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-12">
+                        <form  action="{% url 'search' %}">
+                               <div class="form-search s-same" >
+                                   
+                                    
+                                       <input name="name" class="input-text" type="text" placeholder="Search entire store here"  >
+                                       <button class="button" title="Search" type="submit">
+                                           <i class="fa fa-search"></i>
+                                       </button>
+                                   
+                               </div>
+                        </form>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+        <div class="top-menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-4 col-md-5">
+                        <div class="left-category-menu  hidden-xs">
+                            <div class="left-product-cat">
+                                <div class="category-heading">
+                                    <h2>{% translate 'Category' %}</h2>
+                                </div>
+                                <div class="category-menu-list">
+                                    <ul>
+                                        <li class="arrow-plus">
+                                            <a href="shop.html">
+                                                <span class="cat-thumb">
+                                                    <img alt="" src="{% static 'img/icon/1.png' %}">
+                                                </span>
+                                                Smartphones & Accessories
+                                            </a>
+                                            <div class="cat-left-drop-menu ">
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Dresses</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Cocktail</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Day</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Evening</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Sports</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">shoes</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Sports</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">run</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">sandals</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Books</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Handbags</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Blazers</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">table</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">coats</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">kids</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Clothing</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">T-shirts</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">coats</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Jackets </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">jeans</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="arrow-plus">
+                                            <a href="shop.html">
+                                                <span class="cat-thumb">
+                                                    <img alt="" src="{% static 'img/icon/2.png' %}">
+                                                </span>
+                                                Computers & Networking
+                                            </a>
+                                            <div class="cat-left-drop-menu">
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Bags </a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Bootees  Bags</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Blazers</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Clothing </a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">coats</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">T-shirts</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Lingerie </a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Bands</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Furniture</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Handbag</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Bands</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Funiture</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Lifestyle</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="arrow-plus">
+                                            <a href="shop.html">
+                                                <span class="cat-thumb">
+                                                    <img alt="" src="{% static 'img/icon/3.png' %}">
+                                                </span>
+                                                Laptops & Tablets
+                                            </a>
+                                            <div class="cat-left-drop-menu">
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Footwear Man</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Gold Ring</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Platinum Rings</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Silver Ring</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Tungsten Ring</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Footwear Womens</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Bands Gold</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Platinum Bands</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Silver Bands</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Tungsten Bands</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Rings</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Platinum Bracelets</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Gold Ring</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Silver Ring</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Diamond Bracelets</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Bands</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Platinum Necklaces </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Gold Ring</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Silver Ring</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Sunglasses</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="arrow-plus">
+                                            <a href="shop.html">
+                                                <span class="cat-thumb">
+                                                    <img alt="" src="{% static 'img/icon/4.png' %}">
+                                                </span>
+                                                Camerea & Camcorders
+                                            </a>
+                                            <div class="cat-left-drop-menu">
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Rings</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Coats & Jackets</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Blazers</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Jackets</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Raincoats</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Dresses</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Ankle Boots</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Footwear </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Clog sandals</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Combat Boots</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Accessories</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Bootees Bags</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Blazers</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Jackets</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Shoes</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="cat-left-drop-menu-left">
+                                                    <a class="menu-item-heading" href="#">Top</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Briefs</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Camis</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Nightwear</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Shapewear</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a href="shop.html">
+                                                <span class="cat-thumb ">
+                                                    <img alt="" src="{% static 'img/icon/5.png' %}">
+                                                </span>
+                                                Watches
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="shop.html">
+                                                <span class="cat-thumb">
+                                                    <img alt="" src="{% static 'img/icon/6.png' %}">
+                                                </span>
+                                                Lights & Lighting
+                                            </a>
+                                        </li>
+                                        <li class=" rx-child" style="display: none;">
+                                            <a href="shop.html">
+                                                <span class="cat-thumb"></span>
+                                                clothing
+                                            </a>
+                                        </li>
+                                        <li class="rx-parent">
+                                            <a class="rx-default">
+                                                <span class="cat-thumb fa fa-plus"></span>
+                                                More categories
+                                            </a>
+                                            <a class="rx-show">
+                                                <span class="cat-thumb fa fa-minus"></span>
+                                                close menu
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-8 col-md-7">
+                        <div class="home_menu">
+                            <nav>
+                                <ul>
+                                    <li class="active1"><a href="index.html">{% translate 'Home'%}</a>
+                                    </li>
+                                    <!-- <li><a href="about-us.html">about us</a></li> -->
+                                    <li><a href="{% url 'blogs' %}">Blog</a></li>
+                                    <li class="active1"><a href="#">{% translate 'Pages' %}</a>
+                                        <ul>
+                                            <!-- <li><a href="about-us.html">about us</a></li> -->
+                                            <li><a href="{% url 'blogs' %}">blog</a></li>
+                                            <!-- <li><a href="checkout.html">checkout</a></li> -->
+                                            <!-- <li><a href="contact-us.html">Contacts</a></li> -->
+                                            <li><a href="{% url 'shop' %}">shop</a></li>
+                                            <li><a href="single-product.html">single-product</a></li>
+                                            <li><a href="shopping-cart.html">shopping-cart</a></li>
+                                            <li><a href="wishlist.html">wishlist</a></li>
+                                            <li><a href="faq.html">Faq page</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="contact-us.html">Contacts</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- mobile-menu-area start -->
+        <div class="mobile-menu-area clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mobile-menu">
+                            <nav id="dropdown">
+                                <ul>
+                                    <li class="active1"><a href="index.html">Home</a>
+                                        <ul>
+                                            <li><a href="index-2.html">Home 2</a></li>
+                                            <li><a href="index-3.html">Home 3</a></li>
+                                            <li><a href="index-4.html">Home 4</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="about-us.html">about us</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li class="active1"><a href="#">Pages</a>
+                                        <ul>
+                                            <li><a href="about-us.html">about us</a></li>
+                                            <li><a href="blog.html">blog</a></li>
+                                            <li><a href="blog-details.html">blog details</a></li>
+                                            <li><a href="checkout.html">checkout</a></li>
+                                            <li><a href="contact-us.html">Contacts</a></li>
+                                            <li><a href="shop.html">shop</a></li>
+                                            <li><a href="single-product.html">single-product</a></li>
+                                            <li><a href="shopping-cart.html">shopping-cart</a></li>
+                                            <li><a href="wishlist.html">wishlist</a></li>
+                                            <li><a href="faq.html">Faq page</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="contact-us.html">Contacts</a></li>
+                                </ul>
+                            </nav>
+                        </div>					
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- mobile-menu-area end -->	            
+    </header>
+
+{% block content %}
+
+{% endblock %}
+
+<!-- 
+
+    CONTENT AREA
+
+ -->
+
+
+
+
+ <div class="ma-footer-static">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="container-inner">
+                    <nav>
+                        <ul class="pt-menu-links">
+                            <li class="first home">
+                                <a href="#">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">about us</a>
+                            </li>
+                            <li>
+                                <a href="#">Contacts</a>
+                            </li>
+                            <li>
+                                <a href="#">Blog</a>
+                            </li>
+                            <li class="last">
+                                <a href="#">View All Themes</a>
+                            </li>
+                            <li style="padding-left: 200px;">
+                                <form class="form-inline" id="newsletter-validate-detail" method="POST" name = 'subscriber'>
+                                    {% csrf_token%}
+                                    {% if subscriber_form.email.errors %}
+                                    <div class="alert alert-danger">{{subscriber_form}}.email.errors</div>
+                                    {% endif %}
+                                    {{subscriber_form.email}}
+                                    <button  class="button subscribe" type="submit"><span>Subscribe</span></button>
+                                </form>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="footer-static-top">
+                        <div class="row">
+                            <div class="f-col f-col1 relative col-lg-3 col-md-3 col-sm-6 col-12">
+                                <div class="static_all">
+                                    <div class="footer-static-title">
+                                        <h3>My Account</h3>
+                                    </div>
+                                    <div class="footer-static-content">
+                                        <ul>
+                                            <li>
+                                                <a href="#">My Account</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Login</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">My Cart</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Wishlist</a>
+                                            </li>
+                                            <li class="last">
+                                                <a href="#">Checkout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="f-col f-col2 relative col-lg-3 col-md-3 col-sm-6 col-12">
+                                <div class="static_all">
+                                    <div class="footer-static-title">
+                                        <h3>Information</h3>
+                                    </div>
+                                    <div class="footer-static-content">
+                                        <ul>
+                                            <li>
+                                                <a href="#">Sitemap</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Privacy Policy</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Advanced Search</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Privacy Policy</a>
+                                            </li>
+                                            <li class="last">
+                                                <a href="#">Contact Us</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="f-col f-col3 relative col-lg-3 col-md-3 col-sm-6 col-12">
+                                <div class="static_all">
+                                    <div class="footer-static-title">
+                                        <h3>Customer Service</h3>
+                                    </div>
+                                    <div class="footer-static-content">
+                                        <ul>
+                                            <li>
+                                                <a href="#">Product Recall</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Gift Vouchers</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Returns and Exchanges</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Shipping Options</a>
+                                            </li>
+                                            <li class="last">
+                                                <a href="#">Gift Vouchers</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="f-col f-col4 relative col-lg-3 col-md-3 col-sm-6 col-12">
+                                <div class="footer-static-title">
+                                    <h3>Store information</h3>
+                                </div>
+                                <div class="footer-static-content">
+                                    <div class="footer-contact">
+                                        <p class="adress">My Company</p>
+                                        <p class="phone">42 avenue des Champs Elysées 75000 Paris France</p>
+                                        <p class="fax">Call us now: (+1)866-540-3229</p>
+                                        <p class="email">Email: admin@Bootexperts.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end ma-footer-stati
+============================================ -->
+<!-- end footer-address
+============================================ -->
+<footer class="footer-address">
+    <div class="container">
+        <div class="container-inner">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <address>
+                        Copyright ©
+                        <a href="#">HasTech.</a>
+                        All Rights Reserved
+                    </address>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="footer-payment">
+                        <a href="#">
+                            <img alt="" src="{% static 'img/footer/payment.png' %}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer-address
+============================================ -->
+<!-- start scrollUp
+============================================ -->
+<div id="toTop">
+    <i class="fa fa-chevron-up"></i>
+</div>
+<!-- jquery
+============================================ -->		
+<script src="{% static 'js/vendor/jquery-v1.12.4.min.js' %}"></script>
+<!-- Popper JS
+============================================ -->		
+<script src="{% static 'js/popper.min.js' %}"></script>
+<!-- bootstrap JS
+============================================ -->		
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- wow JS
+============================================ -->		
+<script src="{% static 'js/wow.min.js' %}"></script>
+<!-- price-slider JS
+============================================ -->		
+<script src="{% static 'js/jquery-price-slider.js' %}"></script>
+<!-- Img Zoom js -->
+<script src="{% static 'js/img-zoom/jquery.simpleLens.min.js' %}"></script>
+<!-- meanmenu JS
+============================================ -->		
+<script src="{% static 'js/jquery.meanmenu.js' %}"></script>
+<!-- owl.carousel JS
+============================================ -->		
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<!-- scrollUp JS
+============================================ -->		
+<script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+<!-- Ajax Mail JS
+============================================ -->		
+<script src="{% static 'js/ajax-mail.js' %}"></script>
+<!-- Nivo slider js
+============================================ --> 		
+<script src="{% static 'js/jquery.nivo.slider.js' %}"></script>
+<script src="{% static 'home.js' %}"></script>
+<!-- plugins JS
+============================================ -->		
+<script src="{% static 'js/plugins.js' %}"></script>
+<!-- main JS
+============================================ -->		
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/basket.js' %}"></script>
+
+</body>
+<!-- Mirrored from htmldemo.net/hitstore/hitstore/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Jun 2023 15:00:53 GMT -->
+</html>

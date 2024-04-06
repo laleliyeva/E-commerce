@@ -1,0 +1,595 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <section class="main_shop_area">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <div class="container-inner">
+                        <ul class="tasnimm">
+                            <li class="home">
+                                <a href="#">Home</a>
+                                <span>
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                            </li>
+                            <li class="category3">
+                                <strong>Smartphones & Accessories</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="category-image-all">
+                <div class="container">
+                    <div class="category-image">
+                        <img title="Smartphones & Accessories" alt="Smartphones & Accessories" src="{% static 'img/shop/category-image.jpg' %}">
+                    </div>
+                </div>
+            </div>
+            <div class="main_shop_all">
+                <div class="container">
+                    <div class="row flex-row-reverse">
+                        <div class="col-lg-9 col-md-12 col-12">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <div class="features-tab">
+                                      <!-- Nav tabs -->
+                                        <div class="shop-all-tab">
+                                            <div class="two-part">
+                                                <ul class="nav tabs" role="tablist">
+                                                    <li role="presentation"><a href="#home" class="active" aria-controls="home" role="tab" data-bs-toggle="tab"><i class="fa fa-th-large"></i></a></li>
+                                                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-bs-toggle="tab"><i class="fa fa-align-justify"></i></a></li>
+                                                </ul>
+                                                <!-- <div class="shop5">
+                                                    <label>Show</label>
+                                                    <select>
+                                                        <option value="">12</option>
+                                                        <option value="">24</option>
+                                                        <option value="">36</option>
+                                                    </select>
+                                                     per page        
+                                                </div> -->
+                                            </div>
+                                            
+                                        </div>
+                                      <!-- Tab panes -->
+                                        <div class="tab-content jump">
+                                            <div role="tabpanel" class="tab-pane active" id="home">
+                                                <div class="shop-tab shop-rating">
+                                                    <div id = 'shop-product' class="row">
+                                                        {% for product in products %}
+                                                        <div class="col-xl-3 col-lg-4 col-md-4">
+                                                            <div class="single-product">
+                                                                <div class="product-img">
+                                                                    <a href="{% url 'product' product.product_version.first.pk %}">
+                                                                        <img class="primary-image" src="{{ product.product_version.first.cover_image.url}}" alt="" />
+                                                                    </a>							
+                                                                </div>
+                                                                <div class="product-content">
+                                                                    <div class="price-box">
+                                                                        {% if product.in_sale %}
+                                                                            <span class="old-price">{{ product.old_price }}</span>
+                                                                            <span class="special-price">{{ product.price }}</span>
+
+                                                                        {% else %}
+                                                                            <span class="special-price">{{ product.price }}</span>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                    <h2 class="product-name"><a href="{% url 'product' product.pk %}">{{ product.name }}</a></h2>
+                                                                    <div class="product-icon">
+                                                                        <ul class = 'd-flex'>
+                                                                            <li class="basket" data-id = "{{product.product_version.first.pk}}"><i data-id = "{{product.product_version.first.pk}}" class="fa fa-shopping-cart"> </i></li>
+                                                                            <li class = 'wishlist' data-id = "{{product.product_version.first.pk}}"><i  data-id = "{{product.product_version.first.pk}} "class="fa fa-heart"></i></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {% endfor %}
+                                                        <!-- single-product end -->			
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="profile">
+                                                <div class="li-item">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4">
+                                                            <div class="single-product">
+                                                                <span class="sale-text">Sale</span>
+                                                                <div class="product-img">
+                                                                    <a href="#">
+                                                                        <img class="primary-image" alt="" src="{% static 'img/product/4.jpg' %}">
+                                                                    </a>							
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8">
+                                                            <div class="f-fix">
+                                                                <h2 class="product-name">
+                                                                    <a href="#">Quisque in arcu</a>
+                                                                </h2>
+                                                                <div class="pro-rating">
+                                                                    <div class="pro_one">
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="pro_two">
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star-o"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <p class="rating-links">
+                                                                        <a href="#">1 Review(s)</a>
+                                                                        <span class="separator">|</span>
+                                                                        <a href="#">Add Your Review</a>
+                                                                    </p>
+                                                                </div>
+                                                                <p class="desc">Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Viva </p>
+                                                                <div class="p-box">
+                                                                    <span class="special-price">$123.00</span>
+                                                                </div>
+                                                                <div class="product-icon">
+                                                                        <i class="fa fa-shopping-cart"> </i>
+                                                                        <i class = 'wishlist' data-id = {{product.product_version.first.pk}} style="cursor: pointer;" class="fa fa-heart"></i>
+                                                                        <i class="fa fa-refresh"> </i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="li-item">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4">
+                                                            <div class="single-product">
+                                                                <span class="sale-text">Sale</span>
+                                                                <div class="product-img">
+                                                                    <a href="#">
+                                                                        <img class="primary-image" alt="" src="{% static 'img/product/7_2.jpg' %}">
+                                                                    </a>							
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8">
+                                                            <div class="f-fix">
+                                                                <h2 class="product-name">
+                                                                    <a href="#">Voluptas nulla</a>
+                                                                </h2>
+                                                                <div class="pro-rating">
+                                                                    <div class="pro_one">
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="pro_two">
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star-o"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <p class="rating-links">
+                                                                        <a href="#">1 Review(s)</a>
+                                                                        <span class="separator">|</span>
+                                                                        <a href="#">Add Your Review</a>
+                                                                    </p>
+                                                                </div>
+                                                                <p class="desc">Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Viva </p>
+                                                                <div class="p-box">
+                                                                    <span class="special-price">$222.00</span>
+                                                                </div>
+                                                                <div class="product-icon">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-shopping-cart"> </i>
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <i class="fa fa-heart"></i>
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <i class="fa fa-refresh"> </i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="li-item">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4">
+                                                            <div class="single-product">
+                                                                <span class="sale-text">Sale</span>
+                                                                <div class="product-img">
+                                                                    <a href="#">
+                                                                        <img class="primary-image" alt="" src="{% static 'img/product/20.jpg' %}">
+                                                                    </a>							
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8">
+                                                            <div class="f-fix">
+                                                                <h2 class="product-name">
+                                                                    <a href="#">pleasure rationally</a>
+                                                                </h2>
+                                                                <div class="pro-rating">
+                                                                    <div class="pro_one">
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="pro_two">
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star-o"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <p class="rating-links">
+                                                                        <a href="#">1 Review(s)</a>
+                                                                        <span class="separator">|</span>
+                                                                        <a href="#">Add Your Review</a>
+                                                                    </p>
+                                                                </div>
+                                                                <p class="desc">Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Viva </p>
+                                                                <div class="p-box">
+                                                                    <span class="special-price">$222.00</span>
+                                                                    <span class="old-price">$333.00 </span>
+                                                                </div>
+                                                                <div class="product-icon">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-shopping-cart"> </i>
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <i class="fa fa-heart"></i>
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <i class="fa fa-refresh"> </i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="li-item">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4">
+                                                            <div class="single-product">
+                                                                <span class="sale-text">Sale</span>
+                                                                <div class="product-img">
+                                                                    <a href="#">
+                                                                        <img class="primary-image" alt="" src="{% static 'img/product/16_3.jpg' %}">
+                                                                    </a>							
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8">
+                                                            <div class="f-fix">
+                                                                <h2 class="product-name">
+                                                                    <a href="#">consequences</a>
+                                                                </h2>
+                                                                <div class="pro-rating">
+                                                                    <div class="pro_one">
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="pro_two">
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star-o"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <p class="rating-links">
+                                                                        <a href="#">1 Review(s)</a>
+                                                                        <span class="separator">|</span>
+                                                                        <a href="#">Add Your Review</a>
+                                                                    </p>
+                                                                </div>
+                                                                <p class="desc">Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Viva </p>
+                                                                <div class="p-box">
+                                                                    <span class="special-price">$211.00</span>
+                                                                </div>
+                                                                <div class="product-icon">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-shopping-cart"> </i>
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <i class="fa fa-heart"></i>
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <i class="fa fa-refresh"> </i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="li-item">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4">
+                                                            <div class="single-product">
+                                                                <span class="sale-text">Sale</span>
+                                                                <div class="product-img">
+                                                                    <a href="#">
+                                                                        <img class="primary-image" alt="" src="{% static 'img/product/18.jpg' %}">
+                                                                    </a>							
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8">
+                                                            <div class="f-fix">
+                                                                <h2 class="product-name">
+                                                                    <a href="#">occaecati cupiditate</a>
+                                                                </h2>
+                                                                <div class="pro-rating">
+                                                                    <div class="pro_one">
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="pro_two">
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star-o"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <p class="rating-links">
+                                                                        <a href="#">1 Review(s)</a>
+                                                                        <span class="separator">|</span>
+                                                                        <a href="#">Add Your Review</a>
+                                                                    </p>
+                                                                </div>
+                                                                <p class="desc">Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Viva </p>
+                                                                <div class="p-box">
+                                                                    <span class="special-price">$345.00</span>
+                                                                </div>
+                                                                <div class="product-icon">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-shopping-cart"> </i>
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <i class="fa fa-heart"></i>
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <i class="fa fa-refresh"> </i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="shop-all-tab">
+                                            <div class="two-part">
+                                                <!-- <ul class="nav tabs" role="tablist">
+                                                    <li role="presentation"><a href="#home" class="active" aria-controls="home" role="tab" data-bs-toggle="tab"><i class="fa fa-th-large"></i></a></li>
+                                                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-bs-toggle="tab"><i class="fa fa-align-justify"></i></a></li>
+                                                </ul> -->
+                                                <div class="shop5 page">
+                                                    {% if is_paginated %}
+                                                    <div class="row mt-5">
+                                                      <div class="col text-center">
+                                                        <div class="block-27">
+                                                          <ul>
+                                                            {% if page_obj.has_previous %}
+                                                              <li><a href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+                                                            {% endif %}
+                                                            {% for page in paginator.page_range %}
+                                                              {% if page_obj.number == page %}
+                                                                  <li class="active"><span>{{ page }}</span></li>
+                                                              {% else %}
+                                                                  <li><a href="?page={{page}}">{{page}}</a></li>
+                                                              {% endif %}
+                                                            {% endfor %}
+                                                            {% if page_obj.has_next %}
+                                                                <li><a href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+                                                            {% endif %}
+                                                          </ul>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  {% endif %}       
+                                                </div>
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12">
+                            
+                            
+                            <div class="narrow-by-list">
+                                <div class="block layered-attribute">
+                                    <div class="block-title">
+                                        <h2>Category</h2>
+                                    </div>
+                                    <div class="odd">
+                                        {% for cat in category %}
+                                        <ul>
+                                            <li id = '{{ cat.id }}' class="category-filter" style="cursor: pointer;">
+                                                {{ cat }}
+                                            </li>
+                                        </ul>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                         
+                            <div class="narrow-by-list">
+                                <div class="block layered-attribute">
+                                    <div class="block-title">
+                                        <h2>Manufacturer</h2>
+                                    </div>
+                                    <div class="odd">
+                                        {% for man in manu %}
+                                        <ul>
+                                            <li data-id = '{{ man.id }}' class="manu-filter" style="cursor: pointer;">
+                                                {{ man }}
+                                            </li>
+                                        </ul>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="narrow-by-list">
+                                <div class="block layered-attribute">
+                                    <div class="block-title">
+                                        <h2>Color</h2>
+                                    </div>
+                                    <div class="odd">
+                                        <!-- <div id="color-filters"> -->
+                                            {% for col in color %}
+                                                <div class = 'color-filter' data-id = '{{col.id}}' style="cursor: pointer;">{{ col }}</div>
+                                            {% endfor %}
+                                        <!-- </div> -->
+                                        <!-- style="background-color: {{ col }};" -->
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="shop_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="title ma-title lab">
+                            <h2>
+                                Our brands
+                            </h2>
+                        </div>
+                    </div>
+                </div>         
+                <div class="item_all indicator-style owl-carousel">
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                    <img class="primary-img" src="{% static 'img/item/br1.jpg' %}" alt="" />
+                </div>
+            </div>
+        </div>
+		<!-- end shop_area
+		============================================ -->
+        <!-- start tweets_area
+		============================================ -->
+        <section class="tweets_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="tweet-content">
+                            <div class="tweet-title ma-title">
+                                <h2>Latest Tweets</h2>
+                            </div>
+                            <div class="twitter-article">
+                                <div class="twitter-pic">
+                                    <a href="#"><img src="{% static 'img/tweet/sMv5yar__normal.png' %}" alt="" /></a>
+                                </div>
+                                <div class="twitter-text">
+                                    <span class="tweetprofilelink">
+                                        <strong>
+                                        <a href="#">Magento themes Club</a>
+                                        </strong>
+                                        <a href="#">@plazathemes</a>
+                                    </span>
+                                    <br>
+                                        Check Out "Optician - Responsive #OpenCart #Digital #Theme" on #envatomarket by
+                                        <a href="#">@posthemes</a>
+                                        #themeforest
+                                        <a href="#">https://t.co/NGqqa3v0tf</a>
+                                    <br>
+                                    <span class="tweet-time">
+                                        <a href="#">11h</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="social-footer">
+                            <div class="ma-title">
+                                <h2>Stay Connected</h2>
+                            </div>
+                            <div class="footer-static-content">
+                                <ul class="link-follow">
+                                    <li class="first">
+                                        <a class="twitter fa fa-twitter" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="google fa fa-google-plus" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="facebook fa fa-facebook" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="linkedin fa fa-linkedin" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="youtube fa fa-youtube" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="rss fa fa-rss" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="vimeo-square fa fa-vimeo-square" href="#"></a>
+                                    </li>
+                                    <li class="first">
+                                        <a class="instagram fa fa-instagram" href="#"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="{% static 'js/filters.js' %}"></script>
+{% endblock %}
